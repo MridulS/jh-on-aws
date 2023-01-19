@@ -26,9 +26,12 @@ jobs:
         --instance-type t2.xlarge \
         --key-name jhub-test-econ-ark \
         --count 1 \
-        --user-data IyEvYmluL2Jhc2gKY3VybCAtTCBodHRwczovL3RsamguanVweXRlci5vcmcvYm9vdHN0cmFwLnB5IFwKICB8IHN1ZG8gcHl0aG9uMyAtIFwKICAgIC0tYWRtaW4gamh1Yi1lY29uLWFkbWluCg== \
+        --user-data ${{ secrets.JHUB_SETUP_USER_DATA }} \
         --tag-specifications 'ResourceType=instance,Tags=[{Key=name,Value=gh-jhub}]' \
         --output text --query 'Instances[*].InstanceId')
-
         aws ec2 wait instance-status-ok \
             --instance-ids $JHUB_INSTANCE_ID
+        JHUB_IP = $(aws ec2 describe-instances --instance-ids $JHUB_INSTANCE_ID --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
+        echo $JHUB_IP
+    - name: Wait for user startup script
+      run: sleep 6000s
