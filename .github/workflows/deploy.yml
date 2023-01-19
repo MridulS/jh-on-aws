@@ -27,4 +27,4 @@ jobs:
         --key-name jhub-test-econ-ark \
         --count 1 \
         --user-data IyEvYmluL2Jhc2gKY3VybCAtTCBodHRwczovL3RsamguanVweXRlci5vcmcvYm9vdHN0cmFwLnB5IFwKICB8IHN1ZG8gcHl0aG9uMyAtIFwKICAgIC0tYWRtaW4gamh1Yi1lY29uLWFkbWluCg== \
-        --tag-specifications name=gh-jhub
+        --tag-specifications 'ResourceType=instance,Tags=[{Key=name,Value=gh-jhub}]'
