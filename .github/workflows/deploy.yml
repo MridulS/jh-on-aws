@@ -25,4 +25,6 @@ jobs:
         aws ec2 run-instances --image-id ami-00874d747dde814fa \
         --instance-type t2.xlarge \
         --key-name jhub-test-econ-ark \
-        --count 1
+        --count 1 \
+        --user-data IyEvYmluL2Jhc2gKY3VybCAtTCBodHRwczovL3RsamguanVweXRlci5vcmcvYm9vdHN0cmFwLnB5IFwKICB8IHN1ZG8gcHl0aG9uMyAtIFwKICAgIC0tYWRtaW4gamh1Yi1lY29uLWFkbWluCg== \
+        --tag-specifications name=gh-jhub
