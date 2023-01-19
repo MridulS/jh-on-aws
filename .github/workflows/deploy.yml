@@ -22,5 +22,7 @@ jobs:
         aws-region: us-east-1 # use your region here.
     - name: test AWS
       run: |
-        aws ec2 describe-instances
-    
+        aws ec2 run-instances --image-id ami-00874d747dde814fa \
+        --instance-type t2.xlarge \
+        --key-name jhub-test-econ-ark \
+        --count 1
