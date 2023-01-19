@@ -11,6 +11,8 @@ jobs:
   deploy:
     name: Setup and deploy
     runs-on: ubuntu-latest
+    environment:
+      name: AWS_ARN
     steps:
     - name: configure aws credentials
       uses: aws-actions/configure-aws-credentials@master
