@@ -20,3 +20,7 @@ jobs:
         role-to-assume: ${{ secrets.AWS_ARN }}
         role-duration-seconds: 900 # the ttl of the session, in seconds.
         aws-region: us-east-1 # use your region here.
+    - name: test AWS
+      run: |
+        aws ec2 describe-instances
+    
