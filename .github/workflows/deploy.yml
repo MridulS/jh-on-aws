@@ -20,11 +20,15 @@ jobs:
         role-to-assume: ${{ secrets.AWS_ARN }}
         role-duration-seconds: 900 # the ttl of the session, in seconds.
         aws-region: us-east-1 # use your region here.
-    - name: test AWS
+    - name: Launch a EC2 instance
       run: |
-        aws ec2 run-instances --image-id ami-00874d747dde814fa \
+        JHUB_INSTANCE_ID=$(aws ec2 run-instances --image-id ami-00874d747dde814fa \
         --instance-type t2.xlarge \
         --key-name jhub-test-econ-ark \
         --count 1 \
         --user-data IyEvYmluL2Jhc2gKY3VybCAtTCBodHRwczovL3RsamguanVweXRlci5vcmcvYm9vdHN0cmFwLnB5IFwKICB8IHN1ZG8gcHl0aG9uMyAtIFwKICAgIC0tYWRtaW4gamh1Yi1lY29uLWFkbWluCg== \
-        --tag-specifications 'ResourceType=instance,Tags=[{Key=name,Value=gh-jhub}]'
+        --tag-specifications 'ResourceType=instance,Tags=[{Key=name,Value=gh-jhub}]' \
+        --output text --query 'Instances[*].InstanceId')
+
+        aws ec2 wait instance-status-ok \
+            --instance-ids $JHUB_INSTANCE_ID
