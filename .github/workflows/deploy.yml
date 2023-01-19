@@ -31,7 +31,7 @@ jobs:
         --output text --query 'Instances[*].InstanceId')
         aws ec2 wait instance-status-ok \
             --instance-ids $JHUB_INSTANCE_ID
-        JHUB_IP = $(aws ec2 describe-instances --instance-ids $JHUB_INSTANCE_ID --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
+        JHUB_IP=$(aws ec2 describe-instances --instance-ids $JHUB_INSTANCE_ID --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
         echo $JHUB_IP
     - name: Wait for user startup script
       run: sleep 6000s
