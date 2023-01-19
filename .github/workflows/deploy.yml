@@ -1,0 +1,20 @@
+name: Setup JupyterHub on AWS
+on:
+  push:
+   branches: [ main ]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    name: Setup and deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: configure aws credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: ${{ secrets.AWS_ARN }}
+        role-duration-seconds: 900 # the ttl of the session, in seconds.
+        aws-region: us-east-1 # use your region here.
